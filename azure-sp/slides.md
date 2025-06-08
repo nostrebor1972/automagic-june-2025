@@ -1,4 +1,9 @@
 ---
+layout: cover
+---
+# Azure Service Principal creation
+
+---
 ---
 # Azure Service Principal creation
 
@@ -9,9 +14,11 @@ az ad sp create-for-rbac --name "myApp" \
     --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}
 ```
 
-In our lab we will use the `Owner` role for the service principal, which grants full access to all resources in the specified scope of our lab subscription.
+In our lab we will use the `Owner` role for the service principal,  
+which grants full access to all resources in the specified scope of our lab subscription.
 
-One can start in Azure's Cloud Shell at https://shell.azure.com, which is pre-configured with the Azure CLI and has access to the necessary permissions. 
+One can start in Azure's Cloud Shell at https://shell.azure.com,  
+which is pre-configured with the Azure CLI and has access to the necessary permissions. 
 
 ```shell
 # Get subscription ID
@@ -27,7 +34,11 @@ layout: two-cols
 ---
 # Azure Service Principal creation response
 
-Notice: `az ad sp create-for-rbac` response with `appId`, `password`, and `tenant` values, which are needed later to configure automation tools like Terraform Azure provider.
+Notice: `az ad sp create-for-rbac` response  
+with `appId`, `password`, and `tenant` values,  
+which are needed later to configure  
+automation tools like Terraform Azure provider  
+or to login into Azure CLI.
 
 ```json
 {
@@ -40,11 +51,11 @@ Notice: `az ad sp create-for-rbac` response with `appId`, `password`, and `tenan
 ::right::
 # Terminology
 
-| Term      | Also Known As      | Description            |
-|-----------|-------------------|------------------------|
-| `appId`   | Application ID, Client ID | Identifies the application (service principal) in Azure AD. |
-| `password`| Client Secret      | Secret string used as the application's credential. |
-| `tenant`  | Directory ID       | Identifies the Azure AD (Entra ID) tenant (directory). |
+| Term      | Known As                  | Description            |
+|-----------|---------------------------|------------------------|
+| `appId`   | Application ID, Client ID | Identifies <br>the application (service principal) <br>in Azure AD. |
+| `password`| Client Secret             | Secret string used as the application's credential. |
+| `tenant`  | Directory ID              | Azure AD (Entra ID) tenant (directory). |
 
 
 ---
