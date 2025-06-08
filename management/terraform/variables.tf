@@ -1,13 +1,13 @@
 variable "admin_password" {
     description = "Admin Password Management"
     type        = string
-    default     = "xxxxxxxxxxxx"
+    default     = null
 }
 
 variable "rg" {
     description = "Resource Group Name"
     type        = string
-    default    = "automagic-management-${local.secrets.envId}"
+    default    = null
 }
 
 variable "name" {
@@ -25,7 +25,8 @@ variable "location" {
 variable "vnet_name" {
     description = "Name of the Virtual Network"
     type        = string
-    default     = "${var.name}-vnet"
+    default     = null
+    
 }
 
 variable "vnet_address" {
