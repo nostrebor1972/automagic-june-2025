@@ -139,3 +139,55 @@ az account set --subscription $AZ_SUBSCRIPTION -o table
 # check result
 az account show -o table
 ```
+
+Summary: We have logged in to Azure with the service principal credentials stored in `./secrets/sp.json`.
+
+---
+---
+# READER Azure Service Principal
+
+Many components line CloudGuard Controller or CME do not need full access to the Azure subscription, but only read access. In this case, we can create a service principal with the `Reader` role.
+
+```shell
+# in Azure Shell
+AZ_SUBSCRIPTION=$(az account show --query id --output tsv)
+READER=$(az ad sp create-for-rbac --name "lab-sp-reader" \
+    --role Reader \
+    --scopes /subscriptions/$AZ_SUBSCRIPTION)
+
+echo $READER | jq -r .
+```
+
+Copy resulting JSON to `secrets/reader.json` in your Codespace.
+
+```json
+{
+  "appId": "xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "password": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "tenant": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
+```
+
+Summary: we are providing READER role service principal credentials for components like CloudGuard Controller or CME, which do not need full access to the Azure subscription.
+
+---
+---
+# Final checks in Codespace
+
+Is reader SP ready and usable?
+
+```shell
+make check-reader
+```
+
+Is admin SP ready and usable?
+
+```shell
+make login-sp
+
+# check result
+az account show -o table
+ENVID=$(jq -r .envId ./secrets/sp.json)
+az group create -n lab-test-rg-$ENVID --location westeurope
+az group delete -n lab-test-rg-$ENVID --yes --no-wait
+```
