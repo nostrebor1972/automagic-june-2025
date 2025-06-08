@@ -1,5 +1,12 @@
 all:
-	echo "just testing"
+	echo "just testing: cpman and policy one shot"
+	./scripts/cpman-up.sh
+	 ./scripts/cpman-wait-for-api.sh ; ./scripts/policy-up.sh
+
+down:
+	./scripts/cpman-wait-for-api.sh ; ./scripts/policy-down.sh
+	./scripts/cpman-down.sh
+
 
 .PHONY: slides login-sp check-reader
 
