@@ -28,3 +28,12 @@ cpman-ssh:
 
 cpman-pass:
 	./scripts/cpman-pass.sh
+
+
+policy: policy-up
+
+policy-up:
+	./scripts/policy-up.sh
+
+policy-down:
+	./scripts/policy-down.sh

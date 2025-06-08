@@ -63,6 +63,6 @@ curl -s -k -X POST "$CPURL/logout" \
   -d "{}"
 echo "Done."
 
-rm sid.json
-echo "Session ID removed."
+# rm sid.json || true
+# echo "Session ID removed."
 echo "Session published successfully"
