@@ -7,3 +7,8 @@ Workshop environment to discover automation options for Check Point products, bo
 * [Github Codespaces](https://docs.github.com/en/codespaces)
     * reproducible devops environment
     * based on [Dev Containers](https://containers.dev/) Specification (see [devcontainer.json](.devcontainer/devcontainer.json))
+
+* [Slidev](https://sli.dev/)
+    * presentation framework
+    * based on markdown
+    * see [slides/slides.md](slides/slides.md)
