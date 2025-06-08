@@ -178,12 +178,21 @@ Is reader SP ready and usable?
 
 ```shell
 make check-reader
+
+# what are current SP roles?
+# get current SP id
+CURRENT_APPID=$(az account show -o json | jq -r .user.name)
+echo "reader.json appId: $(jq -r .appId ./secrets/reader.json) vs current appId: $CURRENT_APPID"
+az role assignment list --assignee $CURRENT_APPID --output table
 ```
 
 Is admin SP ready and usable?
 
 ```shell
 make login-sp
+
+# what are current SP roles?
+az role assignment list --assignee $(az account show -o json | jq -r .user.name) --output table
 
 # check result
 az account show -o table
