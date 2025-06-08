@@ -2,6 +2,7 @@ all:
 	echo "just testing: cpman and policy one shot"
 	./scripts/cpman-up.sh
 	 ./scripts/cpman-wait-for-api.sh ; ./scripts/policy-up.sh
+	 ./scripts/cpman-pass.sh
 
 down:
 	./scripts/cpman-wait-for-api.sh ; ./scripts/policy-down.sh
