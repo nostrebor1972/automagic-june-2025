@@ -39,3 +39,6 @@ terraform.rc
 # Nodejs modules
 node_modules/
 .pnpm-store/
+
+# secrets
+secrets/

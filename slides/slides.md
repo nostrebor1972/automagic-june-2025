@@ -9,6 +9,13 @@ description: "Slides for the workshop"
 ---
 ## Agenda
 
-* aaa
-* bbb
+* Azure Service Principal
+---
+src: ../azure-sp/slides.md
+---
+
+<!-- this page will be loaded from '../azure-sp/slides.md' -->
+
+Contents here are ignored
+
 ---
