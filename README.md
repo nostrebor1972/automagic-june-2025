@@ -1,6 +1,6 @@
-# Automagic June 2025
+# Check Point Automagic, June 2025
 
-Workshop environment to disover automation options for Check Point products, both infrastructure and policy.
+Workshop environment to discover automation options for Check Point products, both infrastructure and policy.
 
 ## Building blocks
 
