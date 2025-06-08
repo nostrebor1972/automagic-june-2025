@@ -54,3 +54,62 @@ module "example_module" {
     storage_account_additional_ips  = []
 }
 ```
+
+---
+---
+
+# Dedicated user for Check Point Management automation
+
+```shell
+# on Security Management server
+make cpman-ssh
+
+# add admin user devops with API key
+mgmt_cli -r true add administrator \
+	name "devops" authentication-method "api key" \
+	permissions-profile "read write all" \
+	--domain 'System Data' --format json
+
+# check user
+mgmt_cli -r true show administrator name "devops" --domain 'System Data' --format json 
+
+# fetch new API key
+API_KEY=$(mgmt_cli -r true add api-key admin-name "devops"  --domain 'System Data' --format json | jq -r '."api-key"')
+echo $API_KEY
+```
+---
+---
+
+# API key use and active sessions
+
+```shell
+# still on Security Management server with valid env var API_KEY
+echo $API_KEY
+# validate API key
+mgmt_cli show version --format json --api-key "$API_KEY"
+
+# api exposure check
+mgmt_cli show api-settings --format json --api-key "$API_KEY" --domain 'System Data' 
+
+# api log
+tail -f $FWDIR/log/api.elg
+
+# or via API access from curl
+PAYLOAD=$(jq -n --arg apikey "$API_KEY" '{"api-key": $apikey, "read-only": true}')
+RESP=$(curl_cli -s -m 5 -k "https://127.0.0.1/web_api/login" -H 'Content-Type: application/json' --data "$PAYLOAD")
+echo $RESP
+SID=$(echo "$RESP" | jq -r '.sid')
+
+# show sessions
+mgmt_cli show sessions details-level full --format json --api-key "$API_KEY" | jq -r '.objects[] | [.uid, .state, ."ip-address", ."user-name", .application, .locks, .changes] | @csv'
+
+# logout
+curl_cli -s -m 5 -k "https://127.0.0.1/web_api/logout" -H 'Content-Type: application/json' -H "x-chkp-sid: $SID"  --data "{}"
+
+# show sessions again
+mgmt_cli show sessions details-level full --format json --api-key "$API_KEY" | jq -r '.objects[] | [.uid, .state, ."ip-address", ."user-name", .application, .locks, .changes] | @csv'
+
+# delete user devops
+mgmt_cli -r true delete administrator name "devops" --domain 'System Data' --format json
+```
+---

@@ -26,3 +26,5 @@ cpman-serial:
 cpman-ssh:
 	./scripts/cpman-ssh.sh
 
+cpman-pass:
+	./scripts/cpman-pass.sh
