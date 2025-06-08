@@ -42,3 +42,5 @@ node_modules/
 
 # secrets
 secrets/
+fingerprints.json
+sid.json
