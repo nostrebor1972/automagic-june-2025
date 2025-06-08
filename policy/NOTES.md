@@ -12,8 +12,21 @@ export CHECKPOINT_PASSWORD="$CPMANPASS"
 export CHECKPOINT_API_KEY=""
 
 cd "$PARENTDIR/policy/terraform"
+rm sid.json
+CHECKPOINT_SESSION_NAME="automagic-june-2025 $(date +%Y-%m-%dT%H:%M:%S)"
 terraform init -upgrade
 terraform apply -auto-approve
+
+SID=$(cat "$PARENTDIR/policy/terraform/sid.json" | jq -r '.sid')
+echo "SID: $SID"
+
+$PARENTDIR/scripts/publish.sh "$SID"
+
+# destroy
+cd "$PARENTDIR/policy/terraform"
+rm sid.json
+CHECKPOINT_SESSION_NAME="DESTROY automagic-june-2025 $(date +%Y-%m-%dT%H:%M:%S)"
+terraform destroy -auto-approve
 
 SID=$(cat "$PARENTDIR/policy/terraform/sid.json" | jq -r '.sid')
 echo "SID: $SID"
