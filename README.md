@@ -59,15 +59,29 @@ Then you can use and verify credentials in Codespace:
 ```bash
 ### IN CODESPACE ###
 # full SP credentials
-./scripts/login-sp.sh
+make login-sp
 # verify credentials
-./scripts/check-reader.sh
+make check-reader
 # and finally full admin credentials to login AGAIN
-./scripts/login-sp.sh
+make login-sp
 ```
 
 Once credentials are set, Azure admin account active, you can start Security Management deployment and push policy as code into it with Terraform at one single step:
 ```bash
 # deploy Security Management and push policy
 make start
+# this takes approx. 10-20 minutes
 ```
+
+### Reference
+
+Makefile driven actions summmary:
+| Action | Description |
+|--------|-------------|
+| `make login-sp` | Login to Azure with full SP credentials |
+| `make check-reader` | Verify Reader credentials |
+| `make start` | Deploy Security Management and push policy |
+| `make cpman-serial` | Monitor Security Management deployment on serial console of VM |
+| `make cpman-ssh` | SSH into Security Management server VM |
+| `make cpman-wait` | Wait for Security Management server VM to be ready to connect from SmartConsole and automation |
+| `make cpman-pass` | Get IP and password for Security Management server VM |

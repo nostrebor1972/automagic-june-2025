@@ -34,6 +34,9 @@ cpman-serial:
 cpman-ssh:
 	./scripts/cpman-ssh.sh
 
+cpman-wait:
+	./scripts/cpman-wait-for-api.sh
+
 cpman-pass:
 	./scripts/cpman-pass.sh
 
