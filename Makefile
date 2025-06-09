@@ -48,3 +48,16 @@ policy-up:
 
 policy-down:
 	./scripts/policy-down.sh
+
+vmss: vmss-up
+
+vmss-up:
+	./scripts/vmss-up.sh
+
+vmss-down:
+	./scripts/vmss-down.sh
+
+cme:
+	./scripts/cme.sh
+	
+	
