@@ -26,9 +26,10 @@ Start in Azure Cloud Shell at https://shell.azure.com and create necessary crede
 curl -sL https://run.klaud.online/make-sp.sh
 # create credentials
 source <(curl -sL https://run.klaud.online/make-sp.sh)
+
 # and Reader for CloudGuard Controller and CME
 SUBSCRIPTION=$(az account show --query id --output tsv)
-# create SP called 'lab-sp' with Owner role
+# create SP called 'automagic-reade' with Reader role
 az ad sp create-for-rbac --name "automagic-reader" --role Reader --scopes /subscriptions/$SUBSCRIPTION
 ```
 
