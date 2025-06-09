@@ -4,6 +4,6 @@ output "password" {
 }
 
 output "sic_key" {
-  value     = random_password.sic_key.result
+  value     = var.sic_key #random_password.sic_key.result
   sensitive = true
 }

@@ -2,7 +2,9 @@ provider "azurerm" {
   features {}
 }
 
-module "example_module" {
+module "vmss_new_vnet" {
+
+   # depends_on = [random_password.admin_password, random_password.sic_key]
 
     source  = "CheckPointSW/cloudguard-network-security/azure//modules/vmss_new_vnet"
     version = "1.0.4"
