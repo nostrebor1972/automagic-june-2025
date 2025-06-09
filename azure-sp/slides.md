@@ -2,6 +2,17 @@
 layout: cover
 ---
 # Azure Service Principal creation
+---
+layout: image
+# the image source
+image: azuread.svg
+---
+
+---
+layout: image
+# the image source
+image: azure.svg
+---
 
 ---
 ---
