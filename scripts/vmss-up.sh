@@ -9,7 +9,7 @@ CPMAN_IP=$(az vm show -d --resource-group "$CPMAN_RG" --name "$CPMAN_NAME" --que
 export TF_VAR_management_IP="$CPMAN_IP"
 
 # random password for VMSS sic key
-VMSS_SIC_KEY=$(cat ./secrets/vmss-sic.txt 2>/dev/null)
+VMSS_SIC_KEY=$(cat ./secrets/vmss-sic.txt 2>/dev/null || true)
 if [[ -z "$VMSS_SIC_KEY" ]]; then
     echo "Generating random VMSS SIC key..."
     VMSS_SIC_KEY=$(openssl rand -base64 16 | tr -d '=/+')
