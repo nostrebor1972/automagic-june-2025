@@ -141,6 +141,11 @@ Summary: Azure admin provided ecrypted service principal credentials, which can 
 We have added `subscription` and `envId` to the service principal credentials for convenience and to enable sharing single Azre subscription with multiple lab participants.
 
 ---
+layout: image
+# the image source
+image: sp-json.svg
+---
+---
 ---
 # Login with Azure Service Principal in ./secrets/sp.json
 
