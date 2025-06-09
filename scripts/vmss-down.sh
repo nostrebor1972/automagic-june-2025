@@ -8,6 +8,6 @@ CPMAN_NAME=$(cd management/terraform; terraform output -raw name)
 CPMAN_IP=$(az vm show -d --resource-group "$CPMAN_RG" --name "$CPMAN_NAME" --query "publicIps" -o tsv)
 export TF_VAR_management_IP="$CPMAN_IP"
 
-(cd management/terraform; terraform init)
+(cd vmss/terraform; terraform init)
 
-(cd management/terraform; terraform destroy -auto-approve)
+(cd vmss/terraform; terraform destroy -auto-approve)
