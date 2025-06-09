@@ -24,7 +24,7 @@ READER_PASSWORD=$(jq -r .password ./secrets/reader.json)
 READER_TENANT=$(jq -r .tenant ./secrets/reader.json)
 
 # logout first
-az logout
+az logout || true
 
 # login as reader
 az login --service-principal \

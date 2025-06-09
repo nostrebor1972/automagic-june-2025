@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # logout first
-az logout
+az logout || true
 
 # fetch the values
 AZ_APPID=$(jq -r .appId ./secrets/sp.json)
