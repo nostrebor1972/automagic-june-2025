@@ -3,6 +3,10 @@ layout: cover
 ---
 # `make policy`
 ## Check Point policy as code with Terraform
+---
+layout: image
+image: clickops_devops_cpman.svg
+---
 
 ---
 ---
