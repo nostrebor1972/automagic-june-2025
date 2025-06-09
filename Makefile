@@ -59,5 +59,17 @@ vmss-down:
 
 cme:
 	./scripts/cme.sh
+
+linux:linux-up
 	
+linux-up:
+	./scripts/linux-up.sh
+linux-down:
+	./scripts/linux-down.sh
+
+fwoff:
+	./scripts/linux-fwoff.sh
+fwon:
+	./scripts/linux-fwon.sh
+
 	
