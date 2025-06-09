@@ -19,7 +19,7 @@ variable "name" {
 variable "location" {
     description = "Location for the resources"
     type        = string
-    default     = "northeurope"
+    default     = "Sweden South"
 }
 
 variable "vnet_name" {
