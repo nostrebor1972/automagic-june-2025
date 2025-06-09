@@ -66,7 +66,8 @@ linux-up:
 	./scripts/linux-up.sh
 linux-down:
 	./scripts/linux-down.sh
-
+linux-ssh:
+	./scripts/linux-ssh.sh
 fwoff:
 	./scripts/linux-fwoff.sh
 fwon:
