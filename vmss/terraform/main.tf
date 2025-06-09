@@ -10,14 +10,14 @@ module "example_module" {
     subscription_id                 = local.secrets.subscriptionId
     source_image_vhd_uri            = "noCustomUri"
     resource_group_name             = "automagic-vmss-${local.secrets.envId}"
-    location                        = "Sweden South"
+    location                        = "francecentral"
     vmss_name                       = "vmss"
     vnet_name                       = "vmss-vnet"
     address_space                   = "10.108.0.0/16"
     subnet_prefixes                 = ["10.108.1.0/24","10.108.2.0/24"]
     backend_lb_IP_address           = 4
     admin_password                  = var.admin_password != null ? var.admin_password : random_password.admin_password.result
-    sic_key                         = "${random_password.sic_key.result}"
+    sic_key                         = local.sic_key
     vm_size                         = "Standard_D3_v2"
     disk_size                       = "100"
     vm_os_sku                       = "sg-byol"

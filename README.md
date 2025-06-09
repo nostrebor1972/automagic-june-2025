@@ -95,3 +95,19 @@ Makefile driven actions summmary:
 | `make fwoff` | Remove routing of linux through CGNS VMSS, Linux goes directly to Internet |
 | `make linux-down` | Remove test Linux VM |
 | `make vmss-down` | Remove CGNS VMSS |
+
+## Remove lab resources
+
+```shell
+# remove Linux machine; repeast if necessary because of resoucer operations timing
+make linux-down
+# remove CGNS VMSS; repeat if necessary 
+make vmss-down
+# remove Security Management server; repeat if necessary
+make cpman-down
+
+# double check - state should be empty
+(cd linux/terraform && terraform state list)
+(cd vmss/terraform && terraform state list)
+(cd management/terraform && terraform state list)
+```

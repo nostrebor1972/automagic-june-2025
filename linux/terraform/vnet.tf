@@ -1,7 +1,7 @@
 
 locals {
   linuxRG  = "linux-${local.spfile.envId}"
-  location = "Sweden South"
+  location = "francecentral"
 }
 
 resource "azurerm_resource_group" "linux" {

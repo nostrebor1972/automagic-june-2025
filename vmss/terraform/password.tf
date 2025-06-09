@@ -24,3 +24,6 @@ resource "random_password" "sic_key" {
   }
 }
 
+locals {
+  sic_key = "${random_password.sic_key.result}"
+}
