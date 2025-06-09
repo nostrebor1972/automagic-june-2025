@@ -70,7 +70,7 @@ Once credentials are set, Azure admin account active, you can start Security Man
 ```bash
 # deploy Security Management and push policy
 make start
-# this takes approx. 10-20 minutes
+# this takes approx. 20 minutes
 ```
 
 ### Reference
@@ -85,3 +85,5 @@ Makefile driven actions summmary:
 | `make cpman-ssh` | SSH into Security Management server VM |
 | `make cpman-wait` | Wait for Security Management server VM to be ready to connect from SmartConsole and automation |
 | `make cpman-pass` | Get IP and password for Security Management server VM |
+| `make policy` | Push policy as code to Security Management server |
+| `make policy-down` | Remove policy from Security Management server (`terraform destroy` ) |

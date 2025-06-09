@@ -18,5 +18,6 @@ fi
 CPMAN_IP=$(az vm show -d --resource-group "$RG" --name "$CPMAN_NAME" --query "publicIps" -o tsv)
 CPPASS="$(cd management/terraform; terraform output -raw password)"
 
-echo "Connecting to ${CPMAN_NAME} at IP $CPMAN_IP with password ${CPPASS}"
+echo "Connect to ${CPMAN_NAME} at IP $CPMAN_IP with password ${CPPASS}"
+echo "  CLI access with: make cpman-ssh"
 
