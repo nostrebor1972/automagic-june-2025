@@ -87,3 +87,11 @@ Makefile driven actions summmary:
 | `make cpman-pass` | Get IP and password for Security Management server VM |
 | `make policy` | Push policy as code to Security Management server |
 | `make policy-down` | Remove policy from Security Management server (`terraform destroy` ) |
+| `make vmss` | Deploy CGNS in VMSS to provide access control, threat prevention and visibility |
+| `make cme` | Instruction to enable auto provisioning of VMSS instances to Management |
+| `make linux` | Make test Linux VM that can be used to test connectivity via firewall |
+| `make linux-ssh` | SSH into test Linux VM |
+| `make fwon` | Route linux through CGNS VMSS |
+| `make fwoff` | Remove routing of linux through CGNS VMSS, Linux goes directly to Internet |
+| `make linux-down` | Remove test Linux VM |
+| `make vmss-down` | Remove CGNS VMSS |
