@@ -7,7 +7,26 @@ layout: cover
 ---
 # `make management` using Terraform module
 
-* sss
+```shell
+# back in Codespace terminal
+
+# login using secrets/sp.json
+make login-sp
+# check reader SP
+make check-reader
+
+# back to full admin access
+make login-admin
+
+# deploy Check Point Management server
+make cpman
+
+# see Security Management VM serial port during deployment
+make cpman-serial
+
+# wait for deployment to finish and for credentials to be available
+./scripts/cpman-wait-for-api.sh; make cpman-pass
+```
 
 ---
 layout: two-cols-header
@@ -58,7 +77,8 @@ module "example_module" {
 ---
 ---
 
-# Dedicated user for Check Point Management automation
+# Dedicated user 
+# for Check Point Management automation
 
 ```shell
 # on Security Management server
@@ -91,23 +111,49 @@ mgmt_cli show version --format json --api-key "$API_KEY"
 # api exposure check
 mgmt_cli show api-settings --format json --api-key "$API_KEY" --domain 'System Data' 
 
+# show sessions
+mgmt_cli show sessions details-level full --format json --api-key "$API_KEY" | jq -r '.objects[] | [.uid, .state, ."ip-address", ."user-name", .application, .locks, .changes] | @csv'
+
 # api log
 tail -f $FWDIR/log/api.elg
+```
+---
+---
+# Management API access with `curl`
 
-# or via API access from curl
-PAYLOAD=$(jq -n --arg apikey "$API_KEY" '{"api-key": $apikey, "read-only": true}')
+```shell
+# continue on Security Management server
+
+# via API access from curl
+alias curl=curl_cli # CP specific curl binary
+
+# each API request is POST with JSON payload
+PAYLOAD=$(jq -n --arg sessonName "CLI session" --arg apikey "$API_KEY" \
+  '{"api-key": $apikey, "read-only": false, "session-name": $sessonName}')
+
+# API handles commands like `login`, `show-hosts` etc.
 RESP=$(curl_cli -s -m 5 -k "https://127.0.0.1/web_api/login" -H 'Content-Type: application/json' --data "$PAYLOAD")
 echo $RESP
 SID=$(echo "$RESP" | jq -r '.sid')
 
-# show sessions
-mgmt_cli show sessions details-level full --format json --api-key "$API_KEY" | jq -r '.objects[] | [.uid, .state, ."ip-address", ."user-name", .application, .locks, .changes] | @csv'
+# show sessions - now inludes our login above
+mgmt_cli show sessions details-level full --format json --api-key "$API_KEY" | jq -r '.objects[] | [.uid, .state, ."ip-address", ."user-name", .application, .locks, .changes, .name] | @csv'
+
 
 # logout
 curl_cli -s -m 5 -k "https://127.0.0.1/web_api/logout" -H 'Content-Type: application/json' -H "x-chkp-sid: $SID"  --data "{}"
 
 # show sessions again
-mgmt_cli show sessions details-level full --format json --api-key "$API_KEY" | jq -r '.objects[] | [.uid, .state, ."ip-address", ."user-name", .application, .locks, .changes] | @csv'
+mgmt_cli show sessions details-level full --format json --api-key "$API_KEY" | jq -r '.objects[] | [.uid, .state, ."ip-address", ."user-name", .application, .locks, .changes, .name] | @csv'
+```
+
+---
+---
+# Remove `devops` user
+
+```shell
+# continue on Security Management server
+make cpman-ssh # if needed
 
 # delete user devops
 mgmt_cli -r true delete administrator name "devops" --domain 'System Data' --format json

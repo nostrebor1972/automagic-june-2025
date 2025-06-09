@@ -6,7 +6,7 @@ RG=$(cd management/terraform; terraform output -raw rg)
 CPMAN_NAME=$(cd management/terraform; terraform output -raw name)
 
 # az serial-console connect --resource-group $RG --name "${CPMAN_NAME}"
-
+echo "${RG} ${CPMAN_NAME}"
 
 CPMAN_IP=$(az vm show -d --resource-group "$RG" --name "$CPMAN_NAME" --query "publicIps" -o tsv)
 CPMAN_PASS=$(cd management/terraform; terraform output -raw password)
