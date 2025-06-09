@@ -208,6 +208,6 @@ az role assignment list --assignee $(az account show -o json | jq -r .user.name)
 # check result
 az account show -o table
 ENVID=$(jq -r .envId ./secrets/sp.json)
-az group create -n lab-test-rg-$ENVID --location westeurope
+az group create -n lab-test-rg-$ENVID --location northeurope
 az group delete -n lab-test-rg-$ENVID --yes --no-wait
 ```

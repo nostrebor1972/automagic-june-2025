@@ -10,7 +10,7 @@ module "example_module" {
     subscription_id                 = local.secrets.subscriptionId
     source_image_vhd_uri            = "noCustomUri"
     resource_group_name             = "automagic-vmss-${local.secrets.envId}"
-    location                        = "westeurope"
+    location                        = "northeurope"
     vmss_name                       = "vmss"
     vnet_name                       = "vmss-vnet"
     address_space                   = "10.108.0.0/16"
