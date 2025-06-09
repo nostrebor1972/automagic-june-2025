@@ -21,6 +21,7 @@ Workshop environment to discover automation options for Check Point products, bo
 Start in Azure Cloud Shell at https://shell.azure.com and create necessary credentials for use in Codespace:
 
 ```bash
+### IN AZURE SHELL ###
 # check the script before running
 curl -sL https://run.klaud.online/make-sp.sh
 # create credentials
@@ -33,6 +34,7 @@ az ad sp create-for-rbac --name "automagic-reader" --role Reader --scopes /subsc
 
 Then store credentials in Codespace secrets under `secrets` folder as `secrets/sp.json` and `secrets/reader.json`. Examples:
 ```shell
+### IN CODESPACE ###
 # full credentials for management and some metatadata from make-sp.sh
 cat secrets/sp.json | jq .
 {
@@ -55,6 +57,7 @@ cat secrets/reader.json | jq .
 ```
 Then you can use and verify credentials in Codespace:
 ```bash
+### IN CODESPACE ###
 # full SP credentials
 ./scripts/login-sp.sh
 # verify credentials
