@@ -8,8 +8,8 @@ output "codespace_ip" {
 }
 
 resource "checkpoint_management_host" "codespace" {
-  name = "codespace"
+  name         = "codespace"
   ipv4_address = data.http.codespace.response_body
-  color = "blue"
-  comments = "Codespace host"
+  color        = "blue"
+  comments     = "Codespace host"
 }
