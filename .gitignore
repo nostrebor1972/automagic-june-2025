@@ -44,3 +44,4 @@ node_modules/
 secrets/
 fingerprints.json
 sid.json
+tfstate.json
