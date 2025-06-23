@@ -20,7 +20,7 @@ login-sp:
 check-reader:
 	./scripts/check-reader.sh
 
-cpman: cpman-up
+cpman: cpman-up cpman-wait policy-up cpman-pass
 
 cpman-up:
 	./scripts/cpman-up.sh
