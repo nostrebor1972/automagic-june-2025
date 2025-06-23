@@ -14,7 +14,7 @@ module "vmss_new_vnet" {
     resource_group_name             = "automagic-vmss-${local.secrets.envId}"
     location                        = "francecentral"
     vmss_name                       = "vmss"
-    vnet_name                       = "vmss-vnet"
+    vnet_name                       = "vmss-vnet-${local.secrets.envId}"
     address_space                   = "10.108.0.0/16"
     subnet_prefixes                 = ["10.108.1.0/24","10.108.2.0/24"]
     backend_lb_IP_address           = 4
