@@ -33,3 +33,10 @@ echo "SID: $SID"
 
 $PARENTDIR/scripts/publish.sh "$SID"
 
+```
+
+
+```shell
+# deleting objects with tag MadeByTerraform 
+cat /var/log/smarttasks.log | grep '^{' | (jq -r -c '[ .operations."deleted-objects"[] | {type: .type, name: .name, tagMadeByTf:( ( [ ((.tags // [])[].name  )  ] | index("MadeByTerraform") ) | . != null ) } | select(.tagMadeByTf) ] | length')
+```

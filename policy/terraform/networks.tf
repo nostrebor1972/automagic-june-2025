@@ -2,6 +2,7 @@ resource "checkpoint_management_network" "vnet_all" {
   name         = "net_vnet_all"
   subnet4      = "10.0.0.0"
   mask_length4 = 8
+  tags    = ["MadeByTerraform"]
 }
 
 resource "checkpoint_management_network" "net-linux" {
@@ -16,5 +17,5 @@ resource "checkpoint_management_network" "net-linux" {
     "method"      = "hide"
   }
   subnet4 = "10.114.1.0"
-  tags    = []
+  tags    = ["a","b","MadeByTerraform","z"]
 }
