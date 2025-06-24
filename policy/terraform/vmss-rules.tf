@@ -64,12 +64,12 @@ resource "checkpoint_management_access_rule" "codespace" {
   position    = { below = checkpoint_management_access_section.vmss_inbound.id }
   source      = [checkpoint_management_host.codespace.name]
   destination = ["Any"]
-  service     = ["https", "ftp", "ssh"]
+  service     = ["https", "ssh"]
   content     = ["Any"]
   time        = ["Any"]
   install_on  = ["Policy Targets"]
   track = {
-    type                    = "None"
+    type                    = "Log"
     accounting              = false
     alert                   = "none"
     enable_firewall_session = false
