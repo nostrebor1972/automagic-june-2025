@@ -12,8 +12,8 @@ module "vmss_new_vnet" {
     subscription_id                 = local.secrets.subscriptionId
     source_image_vhd_uri            = "noCustomUri"
     resource_group_name             = "automagic-vmss-${local.secrets.envId}"
-    location                        = "francecentral"
-    vmss_name                       = "vmss"
+    location                        = "westeurope"
+    vmss_name                       = "vmss-${local.secrets.envId}"
     vnet_name                       = "vmss-vnet-${local.secrets.envId}"
     address_space                   = "10.108.0.0/16"
     subnet_prefixes                 = ["10.108.1.0/24","10.108.2.0/24"]
