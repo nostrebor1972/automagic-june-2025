@@ -69,7 +69,7 @@ make login-sp
 Once credentials are set, Azure admin account active, you can start Security Management deployment and push policy as code into it with Terraform at one single step:
 ```bash
 # deploy Security Management and push policy
-make start
+time make cpman
 # this takes approx. 20 minutes
 ```
 
