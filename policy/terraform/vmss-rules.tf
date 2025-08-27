@@ -28,6 +28,30 @@ resource "checkpoint_management_access_rule" "any_internet" {
   action          = "Accept"
 }
 
+resource "checkpoint_management_access_rule" "to_feeds" {
+  name        = "Network Feeds"
+  layer       = "${checkpoint_management_package.vmss.name} Network"
+  position    = { below = checkpoint_management_access_rule.any_internet.id }
+  source      = ["Any"]
+  destination = [checkpoint_management_network_feed.quiccloud.name, checkpoint_management_network_feed.feedME.name]
+  service     = ["Any"]
+  content     = ["Any"]
+  time        = ["Any"]
+  install_on  = ["Policy Targets"]
+  track = {
+    type                    = "Log"
+    accounting              = false
+    alert                   = "none"
+    enable_firewall_session = false
+    per_connection          = true
+    per_session             = false
+  }
+  action_settings = {}
+  custom_fields   = {}
+  vpn             = "Any"
+  action          = "Accept"
+}
+
 resource "checkpoint_management_access_rule" "app_linux1_internet" {
   name        = "app=linux1: Allow Azure VMs tagged"
   layer       = "${checkpoint_management_package.vmss.name} Network"

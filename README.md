@@ -28,9 +28,8 @@ curl -sL https://run.klaud.online/make-sp.sh
 source <(curl -sL https://run.klaud.online/make-sp.sh)
 
 # and Reader for CloudGuard Controller and CME
-SUBSCRIPTION=$(az account show --query id --output tsv)
-# create SP called 'automagic-reade' with Reader role
-az ad sp create-for-rbac --name "automagic-reader" --role Reader --scopes /subscriptions/$SUBSCRIPTION
+# create SP called 'automagic-reader-xxyyzzaa' with Reader role
+az ad sp create-for-rbac --name "automagic-reader-$(openssl rand -hex 4)" --role Reader --scopes "/subscriptions/$(az account show --query id --output tsv)"
 ```
 
 Then store credentials in Codespace secrets under `secrets` folder as `secrets/sp.json` and `secrets/reader.json`. Examples:
@@ -51,7 +50,7 @@ cat secrets/sp.json | jq .
 cat secrets/reader.json | jq .
 {
   "appId": "00000000-0000-0000-0000-000000000000",
-  "displayName": "automagic-reader",
+  "displayName": "automagic-reader-aabbccdd",
   "password": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",             
   "tenant": "00000000-0000-0000-0000-000000000000",
 }
@@ -70,7 +69,7 @@ make login-sp
 Once credentials are set, Azure admin account active, you can start Security Management deployment and push policy as code into it with Terraform at one single step:
 ```bash
 # deploy Security Management and push policy
-make start
+time make cpman
 # this takes approx. 20 minutes
 ```
 
